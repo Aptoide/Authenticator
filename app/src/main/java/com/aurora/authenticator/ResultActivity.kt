@@ -48,6 +48,7 @@ class ResultActivity : Activity() {
                 B.viewFlipper.displayedChild = 1
                 B.name.setText(it["firstName"])
                 B.email.setText(it["Email"])
+                B.oauthlogin.setText(oAuthToken)
                 B.auth.setText(it["Auth"])
                 B.token.setText(it["Token"])
             } else {

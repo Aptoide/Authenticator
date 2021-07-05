@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.webkit.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import com.aurora.authenticator.databinding.ActivityMainBinding
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private val cookieManager = CookieManager.getInstance()
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         B = ActivityMainBinding.inflate(layoutInflater)
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setup()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("SetJavaScriptEnabled")
     private fun setup() {
         cookieManager.removeAllCookies(null)
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun startResultsActivity(email: String, oauthToken: String?) {
         val intent = Intent(this@MainActivity, ResultActivity::class.java).apply {
             putExtra(AUTH_EMAIL, email)

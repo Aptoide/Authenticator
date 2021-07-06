@@ -42,22 +42,23 @@ class ResultActivity : Activity() {
 
     private fun retrieveAc2dmToken(Email: String?, oAuthToken: String?) {
         task {
-            AC2DMTask().getAC2DMResponse(Email, oAuthToken)
+            //This line will "login" into the account and use the token
+            //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
         } successUi {
-            if (it.isNotEmpty()) {
+            if (oAuthToken != null) {
                 B.viewFlipper.displayedChild = 1
-                B.name.setText(it["firstName"])
-                B.email.setText(it["Email"])
+                //B.name.setText(it["firstName"])
+                B.email.setText(Email)
                 B.oauthlogin.setText(oAuthToken)
-                B.auth.setText(it["Auth"])
-                B.token.setText(it["Token"])
+                //B.auth.setText(it["Auth"])
+                //B.token.setText(it["Token"])
             } else {
                 B.viewFlipper.displayedChild = 2
-                Toast.makeText(this, "Failed to generate AC2DM Auth Token", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Failed to generate oAuth2_4 Token", Toast.LENGTH_LONG).show()
             }
         } failUi {
             B.viewFlipper.displayedChild = 2
-            Toast.makeText(this, "Failed to generate AC2DM Auth Token", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Failed to generate oAuth2_4 Token", Toast.LENGTH_LONG).show()
         }
     }
 }

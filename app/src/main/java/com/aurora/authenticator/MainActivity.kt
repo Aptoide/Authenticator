@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 val cookieMap = Util.parseCookieString(cookies)
                 if (cookieMap.isNotEmpty() && cookieMap[AUTH_TOKEN] != null) {
                     val oauthToken = cookieMap[AUTH_TOKEN]
-                    B.webview.evaluateJavascript("(function() { return document.getElementById('profileIdentifier').innerHTML; })();") {
+                    B.webview.evaluateJavascript("(function() { return document.getElementsByClassName('wLBAL')[0].innerHTML; })();") {
                         val email = it.replace("\"".toRegex(), "")
                         startResultsActivity(email, oauthToken)
                     }

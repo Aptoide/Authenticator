@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.aurora.authenticator.databinding.ActivityResultBinding
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.extensions.authentication
 import nl.komponents.kovenant.task
 import nl.komponents.kovenant.ui.failUi
 import nl.komponents.kovenant.ui.successUi
@@ -48,7 +49,10 @@ class ResultActivity : Activity() {
                 //AC2DMTask().getAC2DMResponse(Email, oAuthToken)
                 //Send token to someone, follow the example
                 val url = "https://account-manager.aptoide.com/api/v1/create_account_tokens?email=${Email.replace("@", "%40")}&oauth2_4_token=${oAuthToken}&clear_tokens=false"
-                Fuel.post(url).response()
+                Fuel.post(url)
+                    .authentication()
+                    .basic("Aptech", "Sekure")
+                    .response()
                 println("==> Requested url: ${url}")
             } successUi {
                 if (oAuthToken != null) {
